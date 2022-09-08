@@ -9,3 +9,9 @@ spring:
     password: 1234
     url: jdbc:postgresql://localhost:5432/zuzex
     driver-class-name: org.postgresql.Driver
+
+
+jwt:
+  token:
+    secret: personData
+    expired: 3600000

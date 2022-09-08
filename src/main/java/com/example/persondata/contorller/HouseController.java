@@ -14,7 +14,7 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/houses")
+@RequestMapping("/api/v1/admin/houses")
 public class HouseController {
     private final HouseService houseService;
 
