@@ -91,6 +91,8 @@ public class PersonServiceImpl implements PersonService {
                 .orElseThrow(() ->
                         new PersonNotFoundException("no person found with id " + id));
         var updatedPerson = personMapper.updatePersonByDto(personEntity, personDto);
+        if(personDto.getHouses()==null)
+            return mapper.map(personDao.save(updatedPerson), PersonDto.class);
         var houses = mapper.mapCollections(Arrays.asList(personDto.getHouses().toArray()), HouseEntity.class);
         updatedPerson.setHouses(new HashSet<>(getIdForExistHouses(houses)));
         return mapper.map(personDao.save(updatedPerson), PersonDto.class);
@@ -157,6 +159,8 @@ public class PersonServiceImpl implements PersonService {
                                 " house data in this request." +
                                 " You This request can change the data about the possessions of a person," +
                                 " but cannot change their essence.");
+                    System.out.println(existHouse);
+                    System.out.println(house);
                     return existHouse == null ? house : existHouse;
                 }).collect(Collectors.toList());
     }
